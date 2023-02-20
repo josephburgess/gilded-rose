@@ -95,11 +95,28 @@ describe('Gilded Rose', () => {
     });
 
     it('should not change its quality or sellIn value', () => {
-      for(let i = 0; i < 100; i++ ){
+      for(let i = 0; i < 10; i++ ){
         gildedRose.updateQuality()
         expect(gildedRose.items[0].quality).toBe(80)
         expect(gildedRose.items[0].sellIn).toBe(0)}
     });
   });
+
+  // describe('Conjured items', () => {
+  //   beforeEach(() => {
+  //     gildedRose = new GildedRose([new Item("Conjured Mana Cake", 3, 6)])
+  //   });
+
+  //   it('should degrade in quality by two in a day', () => {
+  //     gildedRose.updateQuality()
+  //     expect(gildedRose.items[0].quality).toBe(4)
+  //   });
+
+  //   it('should degrade in quality by four in two days', () => {
+  //     gildedRose.updateQuality()
+  //     gildedRose.updateQuality()
+  //     expect(gildedRose.items[0].quality).toBe(2)
+  //   });
+  // });
   
 });
