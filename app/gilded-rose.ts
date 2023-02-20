@@ -19,29 +19,30 @@ export class GildedRose {
 
   updateQuality() {
     this.items.forEach((item) => {
-      switch (item.name) {
-        case 'Aged Brie':
-          this.updateAgedBrieQuality(item);
-          break;
-        case 'Backstage passes to a TAFKAL80ETC concert':
-          this.updateConcertTicketsQuality(item);
-          break;
-        case 'Sulfuras, Hand of Ragnaros':
-          break;
-        default:
-          if (item.name.startsWith('Conjured')) {
-            this.updateConjuredItemQuality(item);
-          } else {
-            this.updateNormalItemQuality(item);
-          }
-          break;
-      }
-      if (item.name != 'Sulfuras, Hand of Ragnaros') {
-        this.adjustSellIn(item);
-      }
+      this.updateItemQuality(item);
+      this.adjustSellIn(item);
     });
-
     return this.items;
+  }
+
+  private updateItemQuality(item: Item) {
+    switch (item.name) {
+      case 'Aged Brie':
+        this.updateAgedBrieQuality(item);
+        break;
+      case 'Backstage passes to a TAFKAL80ETC concert':
+        this.updateConcertTicketsQuality(item);
+        break;
+      case 'Sulfuras, Hand of Ragnaros':
+        break;
+      default:
+        if (item.name.startsWith('Conjured')) {
+          this.updateConjuredItemQuality(item);
+        } else {
+          this.updateNormalItemQuality(item);
+        }
+        break;
+    }
   }
 
   private updateNormalItemQuality(item: Item) {
