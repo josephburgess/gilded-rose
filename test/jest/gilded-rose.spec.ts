@@ -113,7 +113,10 @@ describe('Gilded Rose', () => {
 
   describe('Conjured items', () => {
     beforeEach(() => {
-      gildedRose = new GildedRose([new Item('Conjured Mana Cake', 2, 8)]);
+      gildedRose = new GildedRose([
+        new Item('Conjured Mana Cake', 2, 8),
+        new Item('Conjured Crystal Water', 5, 10),
+      ]);
     });
 
     it('should degrade in quality by two in a day', () => {
@@ -131,6 +134,12 @@ describe('Gilded Rose', () => {
         gildedRose.updateQuality();
       }
       expect(gildedRose.items[0].quality).toBe(0);
+    });
+    it('should apply the same logic to other conjured items', () => {
+      for (let i = 0; i < 3; i++) {
+        gildedRose.updateQuality();
+      }
+      expect(gildedRose.items[1].quality).toBe(4);
     });
   });
 
