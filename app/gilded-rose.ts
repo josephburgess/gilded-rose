@@ -21,39 +21,32 @@ export class GildedRose {
     for (let i = 0; i < this.items.length; i++) {
       if (
         this.items[i].name != 'Aged Brie' &&
-        this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert'
+        this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert' &&
+        this.items[i].name != 'Sulfuras, Hand of Ragnaros' &&
+        !this.items[i].name.startsWith('Conjured')
       ) {
-        if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-          this.updateNormalItemQuality(this.items[i]);
-        }
+        this.updateNormalItemQuality(this.items[i]);
       } else {
         if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
           this.updateConcertTicketsQuality(this.items[i]);
         } else if (this.items[i].name == 'Aged Brie') {
           this.updateAgedBrieQuality(this.items[i]);
+          0;
+        } else if (this.items[i].name.startsWith('Conjured')) {
+          this.updateConjuredItemQuality(this.items[i]);
         }
       }
       if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
         this.adjustSellIn(this.items[i]);
-      }
-      if (this.items[i].sellIn < 0) {
-        if (
-          this.items[i].name != 'Aged Brie' &&
-          this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert'
-        ) {
-          if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-            this.updateNormalItemQuality(this.items[i]);
-          }
-        }
       }
     }
 
     return this.items;
   }
 
-  private decreaseQuality(item: Item) {
+  private decreaseQuality(item: Item, amount: number = 1) {
     if (item.quality > 0) {
-      item.quality--;
+      item.quality = item.quality - amount;
     }
   }
 
@@ -62,7 +55,11 @@ export class GildedRose {
   }
 
   private updateNormalItemQuality(item: Item) {
-    this.decreaseQuality(item);
+    if (item.sellIn <= 0) {
+      this.decreaseQuality(item, 2);
+    } else {
+      this.decreaseQuality(item);
+    }
   }
 
   private updateAgedBrieQuality(item: Item) {
@@ -82,6 +79,14 @@ export class GildedRose {
       this.increaseQuality(item, 2);
     } else {
       this.increaseQuality(item);
+    }
+  }
+
+  private updateConjuredItemQuality(item: Item) {
+    if (item.sellIn <= 0) {
+      this.decreaseQuality(item, 4);
+    } else {
+      this.decreaseQuality(item, 2);
     }
   }
 
