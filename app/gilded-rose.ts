@@ -13,11 +13,11 @@ export class Item {
 export class GildedRose {
   items: Array<Item>;
 
-  constructor(items = [] as Array<Item>) {
+  constructor(items: Item[]) {
     this.items = items;
   }
 
-  updateQuality() {
+  updateQuality(): Item[] {
     this.items.forEach((item) => {
       this.updateItemQuality(item);
       this.adjustSellIn(item);
@@ -25,7 +25,7 @@ export class GildedRose {
     return this.items;
   }
 
-  private updateItemQuality(item: Item) {
+  private updateItemQuality(item: Item): void {
     switch (item.name) {
       case 'Aged Brie':
         this.updateAgedBrieQuality(item);
@@ -45,17 +45,17 @@ export class GildedRose {
     }
   }
 
-  private updateNormalItemQuality(item: Item) {
+  private updateNormalItemQuality(item: Item): void {
     const qualityChange = item.sellIn > 0 ? -1 : -2;
     item.quality = Math.max(0, item.quality + qualityChange);
   }
 
-  private updateAgedBrieQuality(item: Item) {
+  private updateAgedBrieQuality(item: Item): void {
     const qualityChange = item.sellIn > 0 ? 1 : 2;
     item.quality = Math.min(50, item.quality + qualityChange);
   }
 
-  private updateConcertTicketsQuality(item: Item) {
+  private updateConcertTicketsQuality(item: Item): void {
     let qualityChange = 1;
     if (item.sellIn <= 10) qualityChange++;
     if (item.sellIn <= 5) qualityChange++;
@@ -67,12 +67,12 @@ export class GildedRose {
     }
   }
 
-  private updateConjuredItemQuality(item: Item) {
+  private updateConjuredItemQuality(item: Item): void {
     const qualityChange = item.sellIn > 0 ? -2 : -4;
     item.quality = Math.max(0, item.quality + qualityChange);
   }
 
-  private adjustSellIn(item: Item) {
+  private adjustSellIn(item: Item): void {
     if (item.name !== 'Sulfuras, Hand of Ragnaros') {
       item.sellIn--;
     }

@@ -2,10 +2,6 @@ import { Item, GildedRose } from '@/gilded-rose';
 
 describe('Gilded Rose', () => {
   let gildedRose;
-  it('should initialise with an empty array', () => {
-    gildedRose = new GildedRose();
-    expect(gildedRose.items).toEqual([]);
-  });
 
   describe('basic items', () => {
     beforeEach(() => {
@@ -143,11 +139,11 @@ describe('Gilded Rose', () => {
     });
   });
 
-  describe('edge cases', () => {
+  describe('edge cases for quality', () => {
     beforeEach(() => {
       gildedRose = new GildedRose([new Item('+5 Dexterity Vest', -1, 1)]);
     });
-    it('should have a minimum of zero even when reducing by 2 when 1 quality remaining', () => {
+    it('should have a minimum of zero quality even when reducing by 2 when 1 quality remaining', () => {
       gildedRose.updateQuality();
       expect(gildedRose.items[0].quality).toBe(0);
     });
