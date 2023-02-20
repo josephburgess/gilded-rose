@@ -36,56 +36,39 @@ export class GildedRose {
           }
           break;
       }
-      this.adjustSellIn(item);
+      if (item.name != 'Sulfuras, Hand of Ragnaros') {
+        this.adjustSellIn(item);
+      }
     });
 
     return this.items;
   }
 
-  private decreaseQuality(item: Item, amount: number = 1) {
-    if (item.quality > 0) {
-      item.quality = item.quality - amount;
-    }
-  }
-
-  private increaseQuality(item: Item, amount: number = 1) {
-    if (item.quality < 50) item.quality = Math.min(item.quality + amount, 50);
-  }
-
   private updateNormalItemQuality(item: Item) {
-    if (item.sellIn <= 0) {
-      this.decreaseQuality(item, 2);
-    } else {
-      this.decreaseQuality(item);
-    }
+    const qualityChange = item.sellIn > 0 ? -1 : -2;
+    item.quality = Math.max(0, item.quality + qualityChange);
   }
 
   private updateAgedBrieQuality(item: Item) {
-    if (item.sellIn < 0) {
-      this.increaseQuality(item, 2);
-    } else {
-      this.increaseQuality(item);
-    }
+    const qualityChange = item.sellIn > 0 ? 1 : 2;
+    item.quality = Math.min(50, item.quality + qualityChange);
   }
 
   private updateConcertTicketsQuality(item: Item) {
+    let qualityChange = 1;
+    if (item.sellIn <= 10) qualityChange++;
+    if (item.sellIn <= 5) qualityChange++;
+
     if (item.sellIn <= 0) {
       item.quality = 0;
-    } else if (item.sellIn <= 5) {
-      this.increaseQuality(item, 3);
-    } else if (item.sellIn <= 10) {
-      this.increaseQuality(item, 2);
     } else {
-      this.increaseQuality(item);
+      item.quality = Math.min(50, item.quality + qualityChange);
     }
   }
 
   private updateConjuredItemQuality(item: Item) {
-    if (item.sellIn <= 0) {
-      this.decreaseQuality(item, 4);
-    } else {
-      this.decreaseQuality(item, 2);
-    }
+    const qualityChange = item.sellIn > 0 ? -2 : -4;
+    item.quality = Math.max(0, item.quality + qualityChange);
   }
 
   private adjustSellIn(item: Item) {

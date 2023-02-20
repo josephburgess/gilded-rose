@@ -11,7 +11,7 @@ describe('Gilded Rose', () => {
     beforeEach(() => {
       gildedRose = new GildedRose([new Item('+5 Dexterity Vest', 10, 20)]);
     });
-    it('should add a single item, foo', () => {
+    it('should add a single item', () => {
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('+5 Dexterity Vest');
     });
@@ -130,6 +130,16 @@ describe('Gilded Rose', () => {
       for (let i = 0; i < 3; i++) {
         gildedRose.updateQuality();
       }
+      expect(gildedRose.items[0].quality).toBe(0);
+    });
+  });
+
+  describe('edge cases', () => {
+    beforeEach(() => {
+      gildedRose = new GildedRose([new Item('+5 Dexterity Vest', -1, 1)]);
+    });
+    it('should have a minimum of zero even when reducing by 2 when 1 quality remaining', () => {
+      gildedRose.updateQuality();
       expect(gildedRose.items[0].quality).toBe(0);
     });
   });
