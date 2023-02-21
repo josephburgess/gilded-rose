@@ -1,6 +1,10 @@
 # Gilded Rose
 
-This is the Gilded Rose kata in TypeScript.
+This is the Gilded Rose kata in TypeScript. This was carried out as part of week 10 at Makers Academy. The core focus for the week was on producing the best code possible where there was a minimal time pressure.
+
+We had to work alone, and also had to review our own code to practice reflecting on and improving our own work.
+
+I chose to use TypeScript as I had not used it before starting this week and I wanted to use the solo-work as an opportunity to build knowledge in a new language, having been using JavaScript for the previous few weeks.
 
 ## Getting started
 
