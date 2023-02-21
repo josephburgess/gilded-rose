@@ -26,27 +26,10 @@ npx ts-node test/golden-master-text-test.ts 10
 
 To run all tests
 
-### Jest way
-
 ```sh
 npm run test:jest
 ```
-
-To run all tests in watch mode
-
-```sh
-npm run test:jest:watch
-```
-
-### Mocha way
-
-```sh
-npm run test:mocha
-```
-
-======================================
-Gilded Rose Requirements Specification
-======================================
+## Gilded Rose Requirements Specification
 
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.
 
